@@ -1,0 +1,6 @@
+pandas==2.2.3
+openpyxl==3.1.5
+PyYAML==6.0.2
+Evtx==0.6.1
+notebook==7.3.0
+ipykernel==6.29.5
