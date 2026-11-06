@@ -5,46 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyberion ThreatShield Workbench</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --accent: #58a6ff; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1xl)); gap: 20px; margin-top: 30px; }
-        .card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 6px; }
-        .card h2 { margin-top: 0; font-size: 1.2rem; color: #fff; }
-        .card a { display: block; margin: 8px 0; color: var(--accent); text-decoration: none; font-size: 0.95rem; }
+        :root { 
+            --bg: #0d1117; 
+            --card: #161b22; 
+            --border: #30363d; 
+            --text: #c9d1d9; 
+            --text-muted: #8b949e;
+            --accent: #58a6ff; 
+            --success: #238636;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding: 40px 20px; 
+            line-height: 1.6; 
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        h1, h2, h3 { color: #fff; }
+        h1 { border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 5px; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-top: 0; margin-bottom: 30px; }
+        
+        /* Summary Section Styling */
+        .summary-block { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            padding: 30px; 
+            border-radius: 8px; 
+            margin-bottom: 40px; 
+        }
+        .summary-block h2 { margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .summary-block ul { padding-left: 20px; }
+        .summary-block li { margin-bottom: 10px; }
+        
+        /* Diagram styling */
+        .diagram { 
+            font-family: monospace; 
+            background: #070a0e; 
+            padding: 15px; 
+            border-radius: 6px; 
+            border: 1px solid var(--border);
+            color: #58a6ff;
+            overflow-x: auto;
+            white-space: pre;
+            margin: 20px 0;
+        }
+
+        /* Grid Layout for Assets */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
+        .card h3 { margin-top: 0; font-size: 1.3rem; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .card a { display: block; margin: 10px 0; color: var(--accent); text-decoration: none; font-weight: 500; }
         .card a:hover { text-decoration: underline; }
-        .status { font-size: 0.85rem; color: #8b949e; background: #21262d; padding: 4px 8px; border-radius: 12px; display: inline-block; margin-bottom: 10px; }
+        
+        .status { 
+            font-size: 0.75rem; 
+            color: #fff; 
+            background: var(--success); 
+            padding: 4px 10px; 
+            border-radius: 12px; 
+            display: inline-block; 
+            margin-bottom: 15px; 
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Cyberion ThreatShield Engineering Workspace</h1>
-        <p>Managed Security Services | Detection Engineering & Threat Hunting Practice</p>
+        <h1>Cyberion ThreatShield Workbench</h1>
+        <p class="subtitle">Managed Security Services | Detection Engineering & Threat Hunting Practice</p>
         
+        <!-- Section 1: One Page Technical Engagement Summary -->
+        <div class="summary-block">
+            <h2>Technical Engagement Summary</h2>
+            <p><strong>Project Overview & Business Context:</strong> The <em>Cyberion ThreatShield Workbench</em> is a production-grade, framework-aligned detection engineering and threat hunting workspace designed for modern Security Operations Centers (SOCs). Developed for the Advanced Security Engineering Individual Contributor Track, this project replaces undocumented tribal workflows with a structured, repeatable, and automated defense model. The workbench bridges the gap between heterogeneous raw telemetry data and portable, enterprise-ready alerting logic mapped directly to the <strong>MITRE ATT&CK framework</strong>.</p>
+            
+            <h3>Core Technical Implementations</h3>
+            <div class="diagram">[Adversary Emulation Telemetry]
+  ├── Phase 1: Mordor JSON (OSSEM Schema)  ──┐
+  ├── Phase 2: Splunk BOTS (CIM CSV)       ──┼─> [Unified Data Ingestion Engine]
+  └── Phase 3: Native Windows XML (EVTX)   ──┘                │
+                                                              ▼
+[GitHub Pages Documentation Hub] <─── [CI/CD Pipeline] <─── [Sigma Validation Engine]</div>
+            
+            <ul>
+                <li><strong>Unified Multi-Source Ingestion Engine (<code>telemetry_parser.py</code>):</strong> A custom, object-oriented Python engine built with Pandas to ingest and normalize disparate threat data schemas into a single unified dataframe structure. It sequentially parses Mordor JSON (OSSEM), Splunk BOTS (CIM CSV), and Native Windows XML Event Logs, utilizing hardened type-casting routines to prevent data gaps from causing crashes.</li>
+                <li><strong>Automated Quality Assurance Framework (<code>sigma_validator.py</code>):</strong> An automated syntax-validation harness that enforces strict compliance with the generic Sigma Detection Format across a library of 15+ version-controlled rules. It algorithmically audits metadata completeness, severity tiers, and proper MITRE ATT&CK technique tag mapping before any production deployment.</li>
+                <li><strong>Continuous Integration / Continuous Deployment (CI/CD):</strong> Implemented via GitHub Actions (<code>ci-pipeline.yml</code>), which automatically boots headless cloud environments upon every code commit to run quality enforcement tests. Concurrently, a publishing workflow compiles technical markdown files directly onto GitHub Pages, providing live, browser-accessible hosting for enterprise stakeholders.</li>
+            </ul>
+
+            <h3>Adversary Technique Mapping & Incident Playbooks</h3>
+            <p>The workbench maintains an interactive MITRE ATT&CK Coverage Matrix mapping 20 critical adversarial techniques across four core tactics. Defensive capabilities were proven via structured threat hunts that uncovered an active compromise track, now documented in full lifecycle Incident Case Reports:</p>
+            <ul>
+                <li><strong>Initial Access & Execution:</strong> Spear-phishing via productivity tools with malicious child shell execution loops (<strong>T1566.001 / T1059.001</strong>).</li>
+                <li><strong>Credential Access:</strong> Unauthorized memory harvesting targeting the Local Security Authority Subsystem (<strong>T1003.001</strong>).</li>
+                <li><strong>Command and Control:</strong> Automated, periodic HTTP/S asynchronous heartbeat beacons (<strong>T1071.001</strong>).</li>
+            </ul>
+            <p>Each true-positive finding triggers a repeatable, production-grade Incident Response Playbook detailing explicit, human-executable steps for Identification, Containment, Eradication, and Recovery to reduce response time and eliminate alert fatigue.</p>
+        </div>
+
+        <!-- Section 2: Interactive Navigation Grid -->
+        <h2>Interactive Workspace Artifacts</h2>
         <div class="grid">
             <!-- Playbooks Block -->
             <div class="card">
-                <span class="status">Section 4.7 Deliverable</span>
-                <h2>Incident Response Playbooks</h2>
-                <a href="playbooks/playbook_credential_dumping.md">📋 Credential Dumping (T1003)</a>
-                <a href="playbooks/playbook_lateral_movement.md">📋 Lateral Movement (T1021)</a>
-                <a href="playbooks/playbook_c2_beaconing.md">📋 C2 Beaconing (T1071)</a>
+                <div>
+                    <span class="status">PRD Sec 4.7</span>
+                    <h3>Incident Response Playbooks</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Repeatable containment and recovery protocols for common attack scenarios.</p>
+                </div>
+                <div>
+                    <a href="playbooks/playbook_credential_dumping.md">📋 Credential Dumping (T1003)</a>
+                    <a href="playbooks/playbook_lateral_movement.md">📋 Lateral Movement (T1021)</a>
+                    <a href="playbooks/playbook_c2_beaconing.md">📋 C2 Beaconing (T1071)</a>
+                </div>
             </div>
 
             <!-- Hunt & Case Reports -->
             <div class="card">
-                <span class="status">Section 4.4 & 4.6 Deliverables</span>
-                <h2>Analysis & Incident Logs</h2>
-                <a href="reports/threat_hunt_report_01.md">🔍 Threat Hunt Report (C2 Beacon)</a>
-                <a href="reports/incident_case_report_08.md">🚨 Case Report: WORKSTATION-ENG04</a>
+                <div>
+                    <span class="status">PRD Sec 4.4 & 4.6</span>
+                    <h3>Analysis & Incident Logs</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Hypothesis-driven threat hunting output and case summaries.</p>
+                </div>
+                <div>
+                    <a href="reports/threat_hunt_report_01.md">🔍 Threat Hunt Report (C2 Beacon)</a>
+                    <a href="reports/incident_case_report_08.md">🚨 Case Report: WORKSTATION-ENG04</a>
+                </div>
             </div>
 
             <!-- Executive Summary -->
             <div class="card">
-                <span class="status">Section 4.9 Deliverable</span>
-                <h2>Executive Communications</h2>
-                <a href="reports/executive_summary.md">📊 Business Risk Executive Summary</a>
+                <div>
+                    <span class="status">PRD Sec 4.9</span>
+                    <h3>Executive Communications</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">High-level business risk breakdown and security posture roadmaps.</p>
+                </div>
+                <div>
+                    <a href="reports/executive_summary.md">📊 Business Risk Executive Summary</a>
+                </div>
             </div>
         </div>
     </div>
