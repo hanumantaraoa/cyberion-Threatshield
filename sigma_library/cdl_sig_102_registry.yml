@@ -1,0 +1,28 @@
+title: Registry Hive Export via Command Line
+id: cdl-sig-102
+status: stable
+description: Detects command-line execution intended to save or export security registry hives (SAM, SECURITY, SYSTEM) containing hashed user credentials.
+references:
+  - https://mitre.org
+author: Cyberion Detection Engineering Practice
+date: 2026/11/04
+tags:
+  - attack.credential_access
+  - attack.t1003.002
+logsource:
+  product: windows
+  service: process_creation
+detection:
+  selection:
+    event_id: 1
+    event_data.CommandLine|contains:
+      - 'reg save hklm\sam'
+      - 'reg save hklm\security'
+      - 'reg save hklm\system'
+      - 'reg.exe save hklm\sam'
+      - 'reg.exe save hklm\security'
+      - 'reg.exe save hklm\system'
+  condition: selection
+falsepositives:
+  - Standardized administrative backup routines (should be explicitly safelisted by parent process if found)
+level: high

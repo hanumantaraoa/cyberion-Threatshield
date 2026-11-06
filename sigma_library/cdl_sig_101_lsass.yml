@@ -1,0 +1,30 @@
+title: LSASS Memory Scraping via ProcessAccess
+id: cdl-sig-101
+status: stable
+description: Detects process access requests to the Local Security Authority Subsystem Service (lsass.exe) with specific memory-reading access rights, a technique heavily leveraged by tools like Mimikatz or Task Manager dumps.
+references:
+  - https://mitre.org
+author: Cyberion Detection Engineering Practice
+date: 2026/11/04
+tags:
+  - attack.credential_access
+  - attack.t1003.001
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    event_id: 10
+    event_data.TargetImage: 'C:\Windows\System32\lsass.exe'
+    event_data.GrantedAccess:
+      - '0x1010'  # PROCESS_VM_READ | PROCESS_QUERY_INFORMATION
+      - '0x1F1FFF' # Full Access Control Right
+  filter_legitimate:
+    event_data.SourceImage:
+      - 'C:\Program Files\Windows Defender\MsMpEng.exe'
+      - 'C:\Windows\System32\wbem\WmiPrvSE.exe'
+  condition: selection and not filter_legitimate
+falsepositives:
+  - Antivirus scanning platforms
+  - Legitimate EDR telemetry collection agents
+level: high
