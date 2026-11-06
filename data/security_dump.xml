@@ -1,0 +1,14 @@
+<Event xmlns="http://microsoft.com">
+  <System>
+    <Provider Name="Microsoft-Windows-Sysmon" Guid="{57707331-C639-4C59-A820-2B3BDE64B613}" />
+    <EventID>10</EventID>
+    <TimeCreated SystemTime="2026-11-05T02:19:01.0000000Z" />
+    <Computer>WORKSTATION-ENG04</Computer>
+  </System>
+  <EventData>
+    <Data Name="SourceImage">C:\Windows\Temp\update_svc.exe</Data>
+    <Data Name="TargetImage">C:\Windows\System32\lsass.exe</Data>
+    <Data Name="GrantedAccess">0x1010</Data>
+    <Data Name="User">NT AUTHORITY\SYSTEM</Data>
+  </EventData>
+</Event>

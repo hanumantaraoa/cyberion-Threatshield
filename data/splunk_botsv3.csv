@@ -1,0 +1,4 @@
+_time,EventCode,process_path,process,parent_process_path,file_name,user
+2026-11-05T02:14:10Z,4624,,,WORKSTATION-ENG04,,CYBERION\j.doe
+2026-11-05T02:18:22Z,1,C:\Windows\System32\cmd.exe,"cmd.exe /c ""powershell.exe -nop -w hidden -enc aXdl...""",C:\Program Files\Microsoft Office\Office16\outlook.exe,,CYBERION\j.doe
+2026-11-05T02:19:01Z,10,C:\Windows\Temp\update_svc.exe,,,C:\Windows\System32\lsass.exe,NT AUTHORITY\SYSTEM
