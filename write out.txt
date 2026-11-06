@@ -1,0 +1,27 @@
+
+Cyberion ThreatShield: Technical Engagement Summary
+
+
+Project Overview & Business Context
+
+The Cyberion ThreatShield Workbench is a production-grade, framework-aligned detection engineering and threat hunting workspace designed for modern Security Operations Centers (SOCs). Developed for the Advanced Security Engineering Individual Contributor Track, this project replaces undocumented tribal workflows with a structured, repeatable, and automated defense model. The workbench bridges the gap between heterogeneous raw telemetry data and portable, enterprise-ready alerting logic mapped directly to the MITRE ATT&CK framework.
+
+Core Technical Implementations
+
+[Adversary Emulation Telemetry]
+  ├── Phase 1: Mordor JSON (OSSEM Schema)  ──┐
+  ├── Phase 2: Splunk BOTS (CIM CSV)       ──┼─> [Unified Data Ingestion Engine]
+  └── Phase 3: Native Windows XML (EVTX)   ──┘                │
+                                                              ▼
+[GitHub Pages Documentation Hub] <─── [CI/CD Pipeline] <─── [Sigma Validation Engine]
+• Unified Multi-Source Ingestion Engine (telemetry_parser.py): A custom, object-oriented Python engine built with Pandas to ingest and normalize disparate threat data schemas into a single unified dataframe structure. It sequentially parses Mordor JSON (OSSEM), Splunk BOTS (CIM CSV), and Native Windows XML Event Logs, utilizing hardened type-casting routines to prevent data gaps from causing crashes.
+• Automated Quality Assurance Framework (sigma_validator.py): An automated syntax-validation harness that enforces strict compliance with the generic Sigma Detection Format across a library of 15+ version-controlled rules. It algorithmically audits metadata completeness, severity tiers, and proper MITRE ATT&CK technique tag mapping before any production deployment.
+• Continuous Integration / Continuous Deployment (CI/CD): Implemented via GitHub Actions (ci-pipeline.yml), which automatically boots headless cloud environments upon every code commit to run quality enforcement tests. Concurrently, a publishing workflow compiles technical markdown files directly onto GitHub Pages, providing live, browser-accessible hosting for enterprise stakeholders.
+
+Adversary Technique Mapping & Incident Playbooks
+
+The workbench maintains an interactive MITRE ATT&CK Coverage Matrix mapping 20 critical adversarial techniques across four core tactics. Defensive capabilities were proven via structured threat hunts that uncovered an active compromise track, now documented in full lifecycle Incident Case Reports:
+1. Initial Access & Execution: Spear-phishing via productivity tools with malicious child shell execution loops (T1566.001 / T1059.001).
+2. Credential Access: Unauthorized memory harvesting targeting the Local Security Authority Subsystem (T1003.001).
+3. Command and Control: Automated, periodic HTTP/S asynchronous heartbeat beacons (T1071.001).
+Each true-positive finding triggers a repeatable, production-grade Incident Response Playbook detailing explicit, human-executable steps for Identification, Containment, Eradication, and Recovery to reduce response time and eliminate alert fatigue.
